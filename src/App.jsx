@@ -1,10 +1,19 @@
+import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
+import Rootlayout from './Rootlayout'
 import './App.css'
+import Home from './Components/Home'
 
 function App() {
-
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<Rootlayout />}>
+        <Route index element={<Home/>}/>
+      </Route>
+    )
+  )
   return (
     <>
-      <h1 className='bg-black text-white'>Vanakkam</h1>
+      <RouterProvider router={router}></RouterProvider>
     </>
   )
 }
