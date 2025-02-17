@@ -5,6 +5,7 @@ import Search from "../Img/Search.png";
 
 const Header = () => {
   return (
+    <>
     <div className="flex flex-row justify-between w-full items-center bg-blue-400 h-15">
       <img
         src={Logo}
@@ -26,6 +27,7 @@ const Header = () => {
 
       <img src={Profile} title="Profile" alt="profile" className="w-10 h-10 border border-blue-50 mr-2" />
     </div>
+    </>
   );
 };
 
