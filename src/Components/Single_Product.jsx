@@ -1,15 +1,29 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
+import React from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Single_API_Handle } from "../API/API_Handle";
 
 const Single_Product = () => {
-  const {id} = useParams()
-  console.log(id);
-  
+  const [Productdata, setProductdata] = useState({});
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const fetch_product = async () => {
+      const api_data = await Single_API_Handle(id);
+      setProductdata(api_data);
+    };
+    if (id) {
+      fetch_product();
+    }
+  }, [id]);
+
+  console.log(Productdata);
+
   return (
     <>
-    <div>Single_Product</div>
     </>
-  )
-}
+  );
+};
 
-export default Single_Product
+export default Single_Product;

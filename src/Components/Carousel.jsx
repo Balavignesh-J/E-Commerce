@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
 import Products from './Products'
+import slide1 from '../Img/slide1.jpg'
+import slide2 from '../Img/slide2.jpg'
+import slide3 from '../Img/slide3.jpg'
+import slide4 from '../Img/slide4.jpg'
+import slide5 from '../Img/slide5.jpg'
 
 const Carousel = () => {
   const img = [
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1200px-Good_Food_Display_-_NCI_Visuals_Online.jpg"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"},
-    {url: "https://picsum.photos/300/200"}
+    {url: slide1},
+    {url: slide2},
+    {url: slide3},
+    {url: slide4},
+    {url: slide5}
   ]
   
   const [currentindex ,setcurrentindex] = useState(0)
@@ -31,12 +32,24 @@ const Carousel = () => {
   const next = ()=>{
     setcurrentindex((prev)=> ((prev === img.length-1) ? 0 : prev + 1))
   }
+
   
   return (
-    <div className='h-100 w-7xl mx-auto my-5'>
-      <div style={slidestyles} className='flex justify-between items-center'>
-        <button onClick={previous} className='text-neutral-500 text-6xl h-full hover:bg-sky-200/25 hover:text-neutral-950'>{"<"}</button>
-        <button onClick={next} className='text-neutral-500 text-6xl h-full hover:bg-sky-200/25 hover:text-neutral-950'>{">"}</button>
+    <div className='h-100 w-full mx-auto my-5'>
+      <div style={slidestyles} className='h-full relative'>
+        <button onClick={previous} className='absolute left-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/25 hover:text-neutral-950'>{"<"}</button>
+        <button onClick={next} className='absolute right-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/25 hover:text-neutral-950'>{">"}</button>
+        <div className="flex gap-3 absolute bottom-0 left-1/2 transform -translate-x-1/2">
+          {img.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setcurrentindex(index)}
+              className={`w-3 h-3 mx-1 rounded-full ${
+                index === currentindex ? "bg-blue-500" : "bg-gray-300"
+              }`}
+            ></button>
+          ))}
+        </div>
       </div>
       <Products />
     </div>
