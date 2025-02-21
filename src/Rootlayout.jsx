@@ -5,7 +5,7 @@ import Footer from './Components/Footer'
 
 const Rootlayout = () => {
   return (
-    <div>
+    <div> 
         <Header />
         <Outlet />
         <Footer />

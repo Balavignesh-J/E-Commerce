@@ -37,9 +37,9 @@ const Carousel = () => {
   return (
     <div className='h-100 w-full mx-auto my-5'>
       <div style={slidestyles} className='h-full relative'>
-        <button onClick={previous} className='absolute left-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/25 hover:text-neutral-950'>{"<"}</button>
-        <button onClick={next} className='absolute right-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/25 hover:text-neutral-950'>{">"}</button>
-        <div className="flex gap-3 absolute bottom-0 left-1/2 transform -translate-x-1/2">
+        <button onClick={previous} className='rounded-l-lg absolute left-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/50 hover:text-slate-700 w-14 h-14 flex items-center justify-center leading-none'>{"<"}</button>
+        <button onClick={next} className='rounded-r-lg absolute right-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/50 hover:text-slate-700 w-14 h-14 flex items-center justify-center leading-none'>{">"}</button>
+        <div className="flex gap-3 absolute bottom-2 left-1/2 transform -translate-x-1/2">
           {img.map((_, index) => (
             <button
               key={index}

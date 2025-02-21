@@ -21,8 +21,9 @@ const Single_Product = () => {
   console.log(Productdata);
 
   return (
-    <>
-    </>
+    <div>
+      <img src={Productdata.images[0]} alt={Productdata.name} />
+    </div>
   );
 };
 
