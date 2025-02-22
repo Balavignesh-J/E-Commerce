@@ -7,3 +7,17 @@
     border-radius: 10px;
     background-color: rgb(94, 94, 94);
 }
+
+.spinner{
+    border-top: 4px solid grey;
+    animation: spin 3s linear 0ms infinite forwards;
+}
+
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
