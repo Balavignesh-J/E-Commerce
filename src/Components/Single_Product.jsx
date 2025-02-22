@@ -22,7 +22,8 @@ const Single_Product = () => {
 
   return (
     <div>
-      <img src={Productdata.images[0]} alt={Productdata.name} />
+      <h1 className="font-semibold text-3xl">{Productdata.title}</h1>
+      <p className="text-4xl font-light">${Productdata.price}</p>
     </div>
   );
 };
