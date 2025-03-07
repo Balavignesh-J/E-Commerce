@@ -134,7 +134,7 @@ Feel free to fork, enhance, or customize further! Contributions are welcome.
 ---
 
 ## 🔗 Live Demo
-*Add live link if deployed on Vercel/Netlify.*
+*(https://e-commerce-bv-project.netlify.app/)*
 
 ---
 
