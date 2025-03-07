@@ -37,7 +37,6 @@ const Single_Product = () => {
   return (
     <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
       <div className="flex flex-col md:flex-row gap-8 items-start">
-        {/* Product Image */}
         <div className="w-full md:w-1/2">
           <img
             src={Productdata.images[0]}
@@ -46,7 +45,6 @@ const Single_Product = () => {
           />
         </div>
 
-        {/* Product Details */}
         <div className="flex-1 space-y-4">
           <h1 className="text-3xl font-bold text-blue-800">{Productdata.title}</h1>
           <p className="text-gray-600">
@@ -56,7 +54,6 @@ const Single_Product = () => {
           </p>
           <p className="text-4xl font-bold text-green-700">${Productdata.price}</p>
 
-          {/* Buttons */}
           <div className="flex items-center gap-4 mt-4">
             <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
               Add to cart
@@ -66,13 +63,12 @@ const Single_Product = () => {
               aria-label="Add to Wishlist"
               title="Add to Wishlist"
             >
-              ❤️
+              &#9825;
             </button>
           </div>
         </div>
       </div>
 
-      {/* Tab Buttons */}
       <div className="flex text-xl gap-6 mt-6 border-b pb-3">
         <button
           className={`font-semibold ${
@@ -100,7 +96,6 @@ const Single_Product = () => {
         </button>
       </div>
 
-      {/* Tab Content */}
       <div className="mt-4 space-y-4">
         {active === "review" && (
           <div className="space-y-4">
