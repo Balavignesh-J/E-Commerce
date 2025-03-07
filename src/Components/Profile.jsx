@@ -8,7 +8,7 @@ const Profile = () => {
         alt="Profile Avatar" 
         className="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-md" 
       />
-      <h1 className="mt-4 text-2xl font-bold">John Doe</h1>
+      <h1 className="mt-4 text-2xl font-bold">Balavignesh J</h1>
       <p className="text-gray-200">Frontend Developer</p>
       <div className="flex justify-center gap-4 mt-4">
         <a href="www.linkedin.com/in/bala-vignesh-9061a4292" className="text-xl hover:text-blue-300">🔗 LinkedIn</a>
