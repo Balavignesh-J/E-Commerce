@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Products from './Products'
 import slide1 from '../Img/slide1.jpg'
 import slide2 from '../Img/slide2.jpg'
 import slide3 from '../Img/slide3.jpg'
@@ -26,36 +25,39 @@ const Carousel = () => {
     transition: "background-image 0.5s ease-in-out"
   }
 
-  const previous = ()=>{
-      setcurrentindex((prev)=> ((prev === 0) ? img.length-1 : prev - 1))
-  }
+  const previous = ()=> setcurrentindex((prev)=> ((prev === 0) ? img.length-1 : prev - 1))
+  const next = ()=> setcurrentindex((prev)=> ((prev === img.length-1) ? 0 : prev + 1))
 
-  const next = ()=>{
-    setcurrentindex((prev)=> ((prev === img.length-1) ? 0 : prev + 1))
-  }
-
-  
   return (
-    <div className='h-100 w-full mx-auto my-5'>
+    <div className='w-full h-[500px] mx-auto my-5 overflow-hidden rounded-xl shadow-lg'>
       <div style={slidestyles} className='h-full relative'>
-          <button onClick={previous} className='rounded-l-lg absolute left-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/50 hover:text-slate-700 w-14 h-14 flex items-center justify-center leading-none'>{"<"}</button>
-          <button onClick={next} className='rounded-r-lg absolute right-0 top-1/2 transform -translate-y-1/2 text-neutral-500 text-6xl hover:bg-sky-200/50 hover:text-slate-700 w-14 h-14 flex items-center justify-center leading-none'>{">"}</button>
-          <div className="flex gap-3 absolute bottom-2 left-1/2 transform -translate-x-1/2">
+          <button 
+            onClick={previous} 
+            className='absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-4xl bg-black/30 hover:bg-black/50 rounded-full w-12 h-12 flex items-center justify-center'>
+            {"<"}
+          </button>
+          <button 
+            onClick={next} 
+            className='absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-4xl bg-black/30 hover:bg-black/50 rounded-full w-12 h-12 flex items-center justify-center'>
+            {">"}
+          </button>
+          <div className="flex gap-2 absolute bottom-4 left-1/2 transform -translate-x-1/2">
             {img.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setcurrentindex(index)}
-                className={`w-3 h-3 mx-1 rounded-full ${
-                  index === currentindex ? "bg-blue-500" : "bg-gray-300"
+                className={`w-4 h-4 rounded-full transition-all duration-300 ${
+                  index === currentindex ? "bg-blue-600 scale-110" : "bg-gray-300"
                 }`}
               ></button>
             ))}
           </div>
           <Link to={`/search?q=${encodeURIComponent(img[currentindex].key)}`}>
-          <button className="font-semibold text-2xl rounded-2xl cursor-pointer text-white absolute bottom-3 left-4 border border-blue-950 bg-blue-600 p-1">Buy Now</button>
+            <button className="absolute bottom-4 left-4 text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 py-2 px-5 rounded-lg shadow-lg">
+              Buy Now
+            </button>
           </Link>
        </div>
-      <Products />
     </div>
   )
 }
