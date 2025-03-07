@@ -3,78 +3,134 @@ import { useParams } from "react-router-dom";
 import { Single_API_Handle } from "../API/API_Handle";
 
 const Single_Product = () => {
-  const [Productdata, setProductdata] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
+  const [Productdata, setProductdata] = useState(null);
+  const [active, setactive] = useState("description");
+  const [review, setreview] = useState([]);
+  const [detail, setdetail] = useState([]);
   const { id } = useParams();
+
+  const handleclk = (tab) => {
+    if (tab === "review") {
+      setreview(Productdata.reviews);
+    }
+    if (tab === "details") {
+      setdetail(Productdata.tags);
+    }
+    setactive(tab);
+  };
 
   useEffect(() => {
     const fetch_product = async () => {
       try {
         const api_data = await Single_API_Handle(id);
+        console.log("Fetched Data:", api_data);
         setProductdata(api_data);
-      } catch (err) {
-        setError("Failed to fetch product data.");
-      } finally {
-        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching product:", error);
       }
     };
-
-    if (id) {
-      fetch_product();
-    }
+    if (id) fetch_product();
   }, [id]);
 
-  if (loading) {
-    return (
-      <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mt-20"></div>
-    );
-  }
-
-  if (error) {
-    return (
-      <h1 className="text-red-500 text-center text-2xl font-bold py-4 mt-10">
-        {error}
-      </h1>
-    );
-  }
+  if (!Productdata) return <p className="text-center mt-10 text-lg">Loading product...</p>;
 
   return (
-    <div className="max-w-5xl mx-auto p-4 mt-10 bg-white shadow-lg rounded-lg">
-
-      <div className="flex flex-col md:flex-row gap-6">
-        <img
-          src={Productdata.thumbnail}
-          alt={Productdata.title}
-          className="w-full md:w-1/2 h-96 object-cover rounded-lg"
-        />
-
-        <div className="flex-1 space-y-4">
-          <h1 className="text-3xl font-bold text-blue-900">{Productdata.title}</h1>
-          <p className="text-gray-600">{Productdata.description}</p>
-
-          <div className="flex items-center space-x-4">
-            <p className="text-4xl font-bold text-green-700">${Productdata.price}</p>
-            <p className="text-red-500 line-through text-xl">
-              ${(Productdata.price + (Productdata.price * Productdata.discountPercentage / 100)).toFixed(2)}
-            </p>
-            <span className="text-white bg-red-500 px-3 py-1 rounded-full text-sm">
-              {Productdata.discountPercentage}% Off
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <span className="text-yellow-500 text-2xl">⭐️</span>
-            <p className="text-lg font-semibold">{Productdata.rating} / 5</p>
-          </div>
-
-          <p className="text-gray-500">Available Stock: {Productdata.stock}</p>
-
-          <button className="bg-blue-600 text-white py-2 px-6 rounded-lg hover:bg-blue-700 transition">
-            Add to Cart
-          </button>
+    <div className="container mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
+      <div className="flex flex-col md:flex-row gap-8 items-start">
+        {/* Product Image */}
+        <div className="w-full md:w-1/2">
+          <img
+            src={Productdata.images[0]}
+            alt="img"
+            className="w-full h-auto rounded-lg shadow-md object-cover"
+          />
         </div>
+
+        {/* Product Details */}
+        <div className="flex-1 space-y-4">
+          <h1 className="text-3xl font-bold text-blue-800">{Productdata.title}</h1>
+          <p className="text-gray-600">
+            {detail.map((item, index) => (
+              <span key={index} className="text-blue-600 font-medium mr-2">#{item}</span>
+            ))}
+          </p>
+          <p className="text-4xl font-bold text-green-700">${Productdata.price}</p>
+
+          {/* Buttons */}
+          <div className="flex items-center gap-4 mt-4">
+            <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition">
+              Add to cart
+            </button>
+            <button
+              className="p-3 rounded-full border border-gray-300 hover:bg-gray-100 transition"
+              aria-label="Add to Wishlist"
+              title="Add to Wishlist"
+            >
+              ❤️
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab Buttons */}
+      <div className="flex text-xl gap-6 mt-6 border-b pb-3">
+        <button
+          className={`font-semibold ${
+            active === "review" ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500"
+          }`}
+          onClick={() => handleclk("review")}
+        >
+          Review
+        </button>
+        <button
+          className={`font-semibold ${
+            active === "description" ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500"
+          }`}
+          onClick={() => handleclk("description")}
+        >
+          Description
+        </button>
+        <button
+          className={`font-semibold ${
+            active === "details" ? "text-blue-600 border-b-2 border-blue-600" : "text-gray-500"
+          }`}
+          onClick={() => handleclk("details")}
+        >
+          Details
+        </button>
+      </div>
+
+      {/* Tab Content */}
+      <div className="mt-4 space-y-4">
+        {active === "review" && (
+          <div className="space-y-4">
+            {review.map((item, index) => (
+              <div key={index} className="p-4 bg-gray-50 rounded-lg shadow">
+                <p className="font-semibold text-gray-800">{item.reviewerName} - {item.date}</p>
+                <p className="text-yellow-500">{"⭐".repeat(item.rating)}</p>
+                <p className="text-gray-600">{item.comment}</p>
+                <hr className="mt-2"/>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {active === "description" && (
+          <div className="text-gray-700 leading-relaxed">{Productdata.description}</div>
+        )}
+
+        {active === "details" && (
+          <div className="space-y-2">
+            <p className="font-semibold">{Productdata.returnPolicy}</p>
+            <p>{Productdata.shippingInformation}</p>
+            <div>
+              {detail.map((item, index) => (
+                <span key={index} className="text-blue-600 font-medium mr-2">#{item}</span>
+              ))}
+            </div>
+            <p>{Productdata.warrantyInformation}</p>
+          </div>
+        )}
       </div>
     </div>
   );
