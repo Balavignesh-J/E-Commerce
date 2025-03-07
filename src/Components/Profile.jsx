@@ -11,8 +11,8 @@ const Profile = () => {
       <h1 className="mt-4 text-2xl font-bold">Balavignesh J</h1>
       <p className="text-gray-200">Frontend Developer</p>
       <div className="flex justify-center gap-4 mt-4">
-        <a href="www.linkedin.com/in/bala-vignesh-9061a4292" className="text-xl hover:text-blue-300">🔗 LinkedIn</a>
-        <a href="https://github.com/Balavignesh-J" className="text-xl hover:text-blue-300">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/bala-vignesh-9061a4292/" target='_blank' className="text-xl hover:text-blue-300">🔗 LinkedIn</a>
+        <a href="https://github.com/Balavignesh-J" target='_blank' className="text-xl hover:text-blue-300">💻 GitHub</a>
       </div>
     </div>
   )
